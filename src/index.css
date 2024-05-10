@@ -81,3 +81,10 @@ button:focus-visible {
 .page-container {
   width: 100%;
 }
+
+.quiz-details__content-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}

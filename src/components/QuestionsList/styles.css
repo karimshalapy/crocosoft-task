@@ -1,0 +1,9 @@
+.questions-list {
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.questions-list > *:not(:last-child) {
+  margin-bottom: 1rem;
+}

@@ -1,21 +1,21 @@
 export interface Answer {
-  id: number;
+  id: string;
   text: string;
 }
 
 export interface Question {
   answers: Answer[];
-  answer_id: number;
+  answer_id: string;
   feedback_false: string;
   feedback_true: string;
-  id: number;
+  id: string;
   text: string;
 }
 
 export interface Quiz {
   created: string;
   description: string;
-  id: number;
+  id: string;
   modified: string;
   questions: Question[];
   score: number | null;

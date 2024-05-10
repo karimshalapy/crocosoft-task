@@ -2,6 +2,7 @@ import MainLayout from "@/layouts/main";
 import { createBrowserRouter } from "react-router-dom";
 import { ROUTES } from "./routes";
 import { quizesLoader } from "@/loaders/quizesLoader";
+import { quizDetailsLoader } from "@/loaders/quizDetailsLoader";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ export const router = createBrowserRouter([
         lazy: async () => ({
           Component: (await import("@/pages/QuizDetailsPage")).default,
         }),
+        loader: quizDetailsLoader,
       },
     ],
   },
