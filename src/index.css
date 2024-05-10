@@ -24,10 +24,11 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: inherit;
 }
 
 h1 {
@@ -65,4 +66,14 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.main-layout {
+  margin-inline: auto;
+  max-width: 80rem;
+  width: 100%;
+  display: flex;
+  place-items: center;
+  min-height: 100vh;
+  padding: 3rem;
 }
