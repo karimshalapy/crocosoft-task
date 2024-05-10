@@ -9,19 +9,27 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <div>Hello world!</div>,
+        lazy: async () => ({
+          Component: (await import("@/pages/HomePage")).default,
+        }),
       },
       {
         path: ROUTES.createQuiz,
-        element: <div>{ROUTES.createQuiz}</div>,
+        lazy: async () => ({
+          Component: (await import("@/pages/CreateQuizPage")).default,
+        }),
       },
       {
         path: ROUTES.editQuiz,
-        element: <div>{ROUTES.editQuiz}</div>,
+        lazy: async () => ({
+          Component: (await import("@/pages/EditQuizPage")).default,
+        }),
       },
       {
         path: ROUTES.quizDetails,
-        element: <div>{ROUTES.quizDetails}</div>,
+        lazy: async () => ({
+          Component: (await import("@/pages/QuizDetailsPage")).default,
+        }),
       },
     ],
   },
