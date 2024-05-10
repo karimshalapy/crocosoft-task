@@ -1,10 +1,10 @@
-import { ElementType, FC } from "react";
-import { Quiz as TQuiz } from "@/types";
-import "./styles.css";
-import { getYoutubeImageUrl } from "@/utils/getYoutubeImageUrl";
-import { Link, generatePath } from "react-router-dom";
 import { ROUTES } from "@/config/routes";
+import { Quiz as TQuiz } from "@/types";
+import { ElementType, FC } from "react";
+import { Link, generatePath } from "react-router-dom";
 import DateCreatedModified from "../DateCreatedModified/DateCreatedModified";
+import YoutubeImage from "../YoutubeImage/YoutubeImage";
+import "./styles.css";
 
 interface Props {
   quiz: TQuiz;
@@ -25,17 +25,10 @@ export const Quiz: FC<Props> = ({ quiz, as: Comp = "li" }) => {
           <span className="quiz__questions-count">{quiz.questions.length}</span>
         </p>
       </Link>
-      <a
-        className="quiz__thumbnail"
-        href={quiz.url}
-        target="_blank"
-        rel="noreferrer"
-      >
-        <img
-          src={getYoutubeImageUrl(quiz.url)}
-          alt={`Youtube video thumbnail for quiz ${quiz.title}`}
-        />
-      </a>
+      <YoutubeImage
+        url={quiz.url}
+        alt={`Youtube video thumbnail for quiz ${quiz.title}`}
+      />
     </Comp>
   );
 };
