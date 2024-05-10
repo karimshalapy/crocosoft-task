@@ -1,6 +1,7 @@
 import MainLayout from "@/layouts/main";
 import { createBrowserRouter } from "react-router-dom";
 import { ROUTES } from "./routes";
+import { quizesLoader } from "@/loaders/quizesLoader";
 
 export const router = createBrowserRouter([
   {
@@ -12,6 +13,7 @@ export const router = createBrowserRouter([
         lazy: async () => ({
           Component: (await import("@/pages/HomePage")).default,
         }),
+        loader: quizesLoader,
       },
       {
         path: ROUTES.createQuiz,
