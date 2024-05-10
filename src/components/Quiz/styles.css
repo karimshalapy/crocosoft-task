@@ -26,14 +26,6 @@
   }
 }
 
-.quiz__timestamp {
-  color: hsl(0deg, 0%, 45%);
-  font-size: small;
-}
-.quiz__timestamp--modified {
-  font-style: italic;
-}
-
 .quiz__questions-count {
   color: white;
   background-color: palevioletred;

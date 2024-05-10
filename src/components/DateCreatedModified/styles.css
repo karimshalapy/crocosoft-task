@@ -1,0 +1,7 @@
+.timestamp {
+  color: hsl(0deg, 0%, 45%);
+  font-size: small;
+}
+.timestamp--modified {
+  font-style: italic;
+}
