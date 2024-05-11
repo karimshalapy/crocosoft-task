@@ -31,7 +31,15 @@ export const QuizDetailsPage: FC = () => {
           alt={`Youtube video thumbnail for quiz ${quiz.title}`}
         />
       </div>
-      <QuestionsList questions={quiz.questions} />
+      <dl>
+        <dt>Score:</dt>
+        <dd>{quiz.score || 0}</dd>
+
+        <dt>Questions:</dt>
+        <dd>
+          <QuestionsList questions={quiz.questions} as="div" />
+        </dd>
+      </dl>
     </section>
   );
 };
