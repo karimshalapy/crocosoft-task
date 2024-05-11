@@ -42,6 +42,7 @@ export const EditQuizPage: FC = () => {
         }}
         defaultValues={{
           ...quiz,
+          score: quiz.score || undefined,
           questions: quiz.questions.map((question) => ({
             correctAnswerId: question.answer_id,
             feedbackFalse: question.feedback_false,

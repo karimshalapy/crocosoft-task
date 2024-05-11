@@ -1,4 +1,4 @@
-import { object, InferType, string, array } from "yup";
+import { object, InferType, string, array, number } from "yup";
 
 export const answerSchema = object({
   text: string().trim().required("Answer text field is required"),
@@ -19,6 +19,11 @@ export const questionSchema = object({
 export const quizFormSchema = object({
   title: string().trim().required("Title field is required"),
   description: string().trim().required("Description field is required"),
+  score: number()
+    .typeError("Score must be a valid integer")
+    .integer("Score must be a valid integer")
+    .required("Score field is required")
+    .min(0, "Score can't be less than 0"),
   url: string()
     .trim()
     .required("URL field is required")

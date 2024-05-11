@@ -18,6 +18,7 @@ export const QuizForm: FC<Props> = ({ onSubmit, defaultValues }) => {
       questions: defaultValues?.questions || [],
       title: defaultValues?.title || "",
       url: defaultValues?.url || "",
+      score: defaultValues?.score || 0,
       id: defaultValues?.id || Math.random().toString(),
     },
     mode: "onTouched",
@@ -67,6 +68,18 @@ export const QuizForm: FC<Props> = ({ onSubmit, defaultValues }) => {
           />
         </label>
         {errors.url && <p className="quiz-form__error">{errors.url.message}</p>}
+        <label>
+          Score
+          <input
+            {...register("score")}
+            type="number"
+            placeholder="Enter quiz score..."
+            disabled={isSubmitting}
+          />
+        </label>
+        {errors.score && (
+          <p className="quiz-form__error">{errors.score.message}</p>
+        )}
         <QuestionFields />
         <button type="submit" disabled={isSubmitting}>
           {isSubmitting
