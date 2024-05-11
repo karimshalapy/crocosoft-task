@@ -7,10 +7,15 @@ interface Props {
 }
 
 export const AnswersFields: FC<Props> = ({ questionIndex }) => {
-  const { control, register } = useFormContext<QuizFormFields>();
+  const {
+    control,
+    register,
+    formState: { isSubmitting },
+  } = useFormContext<QuizFormFields>();
   const { fields, append, remove } = useFieldArray({
     control,
     name: `questions.${questionIndex}.answers`,
+    keyName: "key",
   });
   return (
     <fieldset className="quiz-form__answers">
@@ -24,6 +29,7 @@ export const AnswersFields: FC<Props> = ({ questionIndex }) => {
               id: Math.random().toString(),
             })
           }
+          disabled={isSubmitting}
         >
           + Add an answer
         </button>
@@ -35,12 +41,14 @@ export const AnswersFields: FC<Props> = ({ questionIndex }) => {
             <input
               type="radio"
               value={field.id}
+              disabled={isSubmitting}
               {...register(`questions.${questionIndex}.correctAnswerId`)}
             />
           </label>
           <label>
             <span className="sr-only">Answer Text</span>
             <input
+              disabled={isSubmitting}
               {...register(`questions.${questionIndex}.answers.${index}.text`)}
               type="text"
               placeholder={`Enter answer ${index + 1} text...`}
@@ -48,7 +56,11 @@ export const AnswersFields: FC<Props> = ({ questionIndex }) => {
           </label>
 
           {array.length > 2 && (
-            <button type="button" onClick={() => remove(index)}>
+            <button
+              type="button"
+              onClick={() => remove(index)}
+              disabled={isSubmitting}
+            >
               ×
             </button>
           )}

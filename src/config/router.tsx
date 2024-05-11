@@ -27,6 +27,7 @@ export const router = createBrowserRouter([
         lazy: async () => ({
           Component: (await import("@/pages/EditQuizPage")).default,
         }),
+        loader: quizDetailsLoader,
       },
       {
         path: ROUTES.quizDetails,

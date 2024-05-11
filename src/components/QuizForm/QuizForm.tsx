@@ -6,24 +6,29 @@ import QuestionFields from "./QuestionFields";
 import "./styles.css";
 
 interface Props {
-  onSubmit?: (values: QuizFormFields) => void;
+  onSubmit?: (values: QuizFormFields) => void | Promise<void>;
+  defaultValues?: Partial<QuizFormFields>;
 }
 
-export const QuizForm: FC<Props> = ({ onSubmit }) => {
+export const QuizForm: FC<Props> = ({ onSubmit, defaultValues }) => {
   const methods = useForm({
     resolver: yupResolver(quizFormSchema),
     defaultValues: {
-      description: "",
-      questions: [],
-      title: "",
-      url: "",
-      id: Math.random().toString(),
+      description: defaultValues?.description || "",
+      questions: defaultValues?.questions || [],
+      title: defaultValues?.title || "",
+      url: defaultValues?.url || "",
+      id: defaultValues?.id || Math.random().toString(),
     },
   });
-  const { register, handleSubmit } = methods;
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = methods;
 
-  const submitHandler = handleSubmit((values) => {
-    onSubmit?.(values);
+  const submitHandler = handleSubmit(async (values) => {
+    await onSubmit?.(values);
   });
   return (
     <FormProvider {...methods}>
@@ -34,6 +39,7 @@ export const QuizForm: FC<Props> = ({ onSubmit }) => {
             {...register("title")}
             type="text"
             placeholder="Enter title..."
+            disabled={isSubmitting}
           />
         </label>
         <label>
@@ -41,6 +47,7 @@ export const QuizForm: FC<Props> = ({ onSubmit }) => {
           <textarea
             {...register("description")}
             placeholder="Enter description..."
+            disabled={isSubmitting}
           />
         </label>
         <label>
@@ -49,9 +56,17 @@ export const QuizForm: FC<Props> = ({ onSubmit }) => {
             {...register("url")}
             type="text"
             placeholder="Enter Youtube URL..."
+            disabled={isSubmitting}
           />
         </label>
         <QuestionFields />
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting
+            ? "Loading..."
+            : defaultValues
+            ? "Edit Quiz"
+            : "Create Quiz"}
+        </button>
       </form>
     </FormProvider>
   );
