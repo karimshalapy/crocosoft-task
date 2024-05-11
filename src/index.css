@@ -109,9 +109,14 @@ button:focus-visible {
 
 .quiz-details__content-wrapper {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
   gap: 1rem;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
 
   h1 {
     margin-top: 0;
