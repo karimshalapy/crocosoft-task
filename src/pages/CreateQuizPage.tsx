@@ -1,13 +1,14 @@
 import QuizForm from "@/components/QuizForm/QuizForm";
 import { ROUTES } from "@/config/routes";
 import { FC } from "react";
-import { generatePath, useNavigate } from "react-router-dom";
+import { Link, generatePath, useNavigate } from "react-router-dom";
 
 export const CreateQuizPage: FC = () => {
   const navigate = useNavigate();
 
   return (
     <section className="page-container">
+      <Link to={ROUTES.home}>&lt; Back to Homepage</Link>
       <h1>Create a Quiz</h1>
       <QuizForm
         onSubmit={async (values) => {

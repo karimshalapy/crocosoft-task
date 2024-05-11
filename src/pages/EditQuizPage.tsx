@@ -2,7 +2,12 @@ import QuizForm from "@/components/QuizForm/QuizForm";
 import { ROUTES } from "@/config/routes";
 import { Quiz } from "@/types";
 import { FC } from "react";
-import { generatePath, useLoaderData, useNavigate } from "react-router-dom";
+import {
+  Link,
+  generatePath,
+  useLoaderData,
+  useNavigate,
+} from "react-router-dom";
 
 export const EditQuizPage: FC = () => {
   const quiz = useLoaderData() as Quiz;
@@ -10,6 +15,7 @@ export const EditQuizPage: FC = () => {
 
   return (
     <section className="page-container">
+      <Link to={ROUTES.home}>&lt; Back to Homepage</Link>
       <h1>Edit quiz #{quiz.id}</h1>
       <QuizForm
         onSubmit={async (values) => {

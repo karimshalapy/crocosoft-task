@@ -10,6 +10,7 @@ export const QuizDetailsPage: FC = () => {
   const quiz = useLoaderData() as Quiz;
   return (
     <section className="page-container quiz-details">
+      <Link to={ROUTES.home}>&lt; Back to Homepage</Link>
       <div className="quiz-details__content-wrapper ">
         <h1>{quiz.title}</h1>
         <Link to={generatePath(ROUTES.editQuiz, { quizId: quiz.id })}>
