@@ -1,8 +1,8 @@
-import { ROUTES } from "@/config/routes";
+import QuizForm from "@/components/QuizForm/QuizForm";
 import { FC } from "react";
 
 export const EditQuizPage: FC = () => {
-  return <div>{ROUTES.editQuiz}</div>;
+  return <QuizForm />;
 };
 
 export default EditQuizPage;

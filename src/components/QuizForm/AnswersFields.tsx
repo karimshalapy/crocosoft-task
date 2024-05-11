@@ -1,4 +1,4 @@
-import { FC, Fragment } from "react";
+import { FC } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { QuizFormFields } from "./quizFormSchema";
 
@@ -13,35 +13,46 @@ export const AnswersFields: FC<Props> = ({ questionIndex }) => {
     name: `questions.${questionIndex}.answers`,
   });
   return (
-    <fieldset>
-      <legend>Answers:</legend>
-      <button
-        type="button"
-        onClick={() =>
-          append({
-            text: "",
-            id: Math.random().toString(),
-          })
-        }
-      >
-        + Add an answer
-      </button>
+    <fieldset className="quiz-form__answers">
+      <div className="quiz-form__top-wrapper">
+        <legend>Answers</legend>
+        <button
+          type="button"
+          onClick={() =>
+            append({
+              text: "",
+              id: Math.random().toString(),
+            })
+          }
+        >
+          + Add an answer
+        </button>
+      </div>
       {fields.map((field, index, array) => (
-        <Fragment key={field.id}>
+        <div className="quiz-form__answer" key={field.id}>
+          <label className="quiz-form__correct-answer">
+            <span className="sr-only">Correct Answer</span>
+            <input
+              type="radio"
+              value={field.id}
+              {...register(`questions.${questionIndex}.correctAnswerId`)}
+            />
+          </label>
           <label>
-            Question Text
+            <span className="sr-only">Answer Text</span>
             <input
               {...register(`questions.${questionIndex}.answers.${index}.text`)}
               type="text"
+              placeholder={`Enter answer ${index + 1} text...`}
             />
           </label>
 
           {array.length > 2 && (
             <button type="button" onClick={() => remove(index)}>
-              -
+              ×
             </button>
           )}
-        </Fragment>
+        </div>
       ))}
     </fieldset>
   );

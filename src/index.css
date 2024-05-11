@@ -68,6 +68,18 @@ button:focus-visible {
   }
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 .main-layout {
   margin-inline: auto;
   max-width: 80rem;
@@ -76,6 +88,10 @@ button:focus-visible {
   place-items: center;
   min-height: 100vh;
   padding: 3rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 }
 
 .page-container {

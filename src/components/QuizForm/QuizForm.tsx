@@ -3,6 +3,7 @@ import type { FC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { type QuizFormFields, quizFormSchema } from "./quizFormSchema";
 import QuestionFields from "./QuestionFields";
+import "./styles.css";
 
 interface Props {
   onSubmit?: (values: QuizFormFields) => void;
@@ -26,18 +27,29 @@ export const QuizForm: FC<Props> = ({ onSubmit }) => {
   });
   return (
     <FormProvider {...methods}>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} className="quiz-form">
         <label>
           Title
-          <input {...register("title")} type="text" />
+          <input
+            {...register("title")}
+            type="text"
+            placeholder="Enter title..."
+          />
         </label>
         <label>
           Description
-          <input {...register("description")} type="text" />
+          <textarea
+            {...register("description")}
+            placeholder="Enter description..."
+          />
         </label>
         <label>
           URL
-          <input {...register("url")} type="text" />
+          <input
+            {...register("url")}
+            type="text"
+            placeholder="Enter Youtube URL..."
+          />
         </label>
         <QuestionFields />
       </form>
