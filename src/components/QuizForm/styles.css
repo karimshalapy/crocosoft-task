@@ -87,8 +87,11 @@
   margin-top: 0.25rem;
   display: flex;
   gap: 0.5rem;
-  align-items: center;
+  align-items: start;
 
+  > div {
+    width: 100%;
+  }
   button {
     display: grid;
     place-items: center;
@@ -101,4 +104,10 @@
 
 label.quiz-form__correct-answer {
   width: auto;
+}
+
+.quiz-form__error {
+  color: lightcoral;
+  font-size: smaller;
+  margin: 0;
 }

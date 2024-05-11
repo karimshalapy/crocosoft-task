@@ -20,11 +20,12 @@ export const QuizForm: FC<Props> = ({ onSubmit, defaultValues }) => {
       url: defaultValues?.url || "",
       id: defaultValues?.id || Math.random().toString(),
     },
+    mode: "onTouched",
   });
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = methods;
 
   const submitHandler = handleSubmit(async (values) => {
@@ -42,6 +43,9 @@ export const QuizForm: FC<Props> = ({ onSubmit, defaultValues }) => {
             disabled={isSubmitting}
           />
         </label>
+        {errors.title && (
+          <p className="quiz-form__error">{errors.title.message}</p>
+        )}
         <label>
           Description
           <textarea
@@ -50,6 +54,9 @@ export const QuizForm: FC<Props> = ({ onSubmit, defaultValues }) => {
             disabled={isSubmitting}
           />
         </label>
+        {errors.description && (
+          <p className="quiz-form__error">{errors.description.message}</p>
+        )}
         <label>
           URL
           <input
@@ -59,6 +66,7 @@ export const QuizForm: FC<Props> = ({ onSubmit, defaultValues }) => {
             disabled={isSubmitting}
           />
         </label>
+        {errors.url && <p className="quiz-form__error">{errors.url.message}</p>}
         <QuestionFields />
         <button type="submit" disabled={isSubmitting}>
           {isSubmitting

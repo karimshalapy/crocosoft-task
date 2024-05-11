@@ -7,7 +7,7 @@ export const QuestionFields: FC = () => {
   const {
     control,
     register,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = useFormContext<QuizFormFields>();
   const { fields, append, remove } = useFieldArray({
     control,
@@ -46,6 +46,11 @@ export const QuestionFields: FC = () => {
               disabled={isSubmitting}
             />
           </label>
+          {errors.questions?.[index]?.text && (
+            <p className="quiz-form__error">
+              {errors.questions?.[index]?.text?.message}
+            </p>
+          )}
           <label>
             False feedback
             <input
@@ -55,6 +60,11 @@ export const QuestionFields: FC = () => {
               disabled={isSubmitting}
             />
           </label>
+          {errors.questions?.[index]?.feedbackFalse && (
+            <p className="quiz-form__error">
+              {errors.questions?.[index]?.feedbackFalse?.message}
+            </p>
+          )}
           <label>
             True feedback
             <input
@@ -64,7 +74,17 @@ export const QuestionFields: FC = () => {
               disabled={isSubmitting}
             />
           </label>
+          {errors.questions?.[index]?.feedbackTrue && (
+            <p className="quiz-form__error">
+              {errors.questions?.[index]?.feedbackTrue?.message}
+            </p>
+          )}
           <AnswersFields questionIndex={index} />
+          {errors.questions?.[index]?.correctAnswerId && (
+            <p className="quiz-form__error">
+              {errors.questions?.[index]?.correctAnswerId?.message}
+            </p>
+          )}
           {array.length > 1 && (
             <button
               className="quiz-form__remove-question-button"
@@ -77,6 +97,9 @@ export const QuestionFields: FC = () => {
           )}
         </fieldset>
       ))}
+      {errors.questions && (
+        <p className="quiz-form__error">{errors.questions?.message}</p>
+      )}
     </fieldset>
   );
 };

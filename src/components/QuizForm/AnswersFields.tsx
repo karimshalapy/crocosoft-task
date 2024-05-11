@@ -10,7 +10,7 @@ export const AnswersFields: FC<Props> = ({ questionIndex }) => {
   const {
     control,
     register,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = useFormContext<QuizFormFields>();
   const { fields, append, remove } = useFieldArray({
     control,
@@ -45,15 +45,27 @@ export const AnswersFields: FC<Props> = ({ questionIndex }) => {
               {...register(`questions.${questionIndex}.correctAnswerId`)}
             />
           </label>
-          <label>
-            <span className="sr-only">Answer Text</span>
-            <input
-              disabled={isSubmitting}
-              {...register(`questions.${questionIndex}.answers.${index}.text`)}
-              type="text"
-              placeholder={`Enter answer ${index + 1} text...`}
-            />
-          </label>
+          <div>
+            <label>
+              <span className="sr-only">Answer Text</span>
+              <input
+                disabled={isSubmitting}
+                {...register(
+                  `questions.${questionIndex}.answers.${index}.text`
+                )}
+                type="text"
+                placeholder={`Enter answer ${index + 1} text...`}
+              />
+            </label>
+            {errors.questions?.[questionIndex]?.answers?.[index]?.text && (
+              <p className="quiz-form__error">
+                {
+                  errors.questions?.[questionIndex]?.answers?.[index]?.text
+                    ?.message
+                }
+              </p>
+            )}
+          </div>
 
           {array.length > 2 && (
             <button
@@ -66,6 +78,11 @@ export const AnswersFields: FC<Props> = ({ questionIndex }) => {
           )}
         </div>
       ))}
+      {errors.questions?.[questionIndex]?.answers && (
+        <p className="quiz-form__error">
+          {errors.questions?.[questionIndex]?.answers?.message}
+        </p>
+      )}
     </fieldset>
   );
 };
